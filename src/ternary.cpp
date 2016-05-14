@@ -1,7 +1,7 @@
 #ifndef TERNARY_CPP
 #define TERNARY_CPP
 
-void Tree::insert_(Node** root,char *str)
+void Tree::insert_(Node** root,const char *str)
 {
 	if (!(*root)) *root = new Node (*str);
 	if (*str < ((*root) -> c)) insert_( &((*root) -> left) , str); 
@@ -13,7 +13,7 @@ void Tree::insert_(Node** root,char *str)
 }
 
 
-int Tree::count_(Node *root,char *str)
+int Tree::count_(Node *root,const char *str)
 {
 	if (!root) return 0;
 	if (*str < root -> c) return count_(root->left,str);
@@ -38,12 +38,17 @@ std::ostream &operator<< (std::ostream &out ,Tree t)
 void extract(Node* from, std::string str, std::vector<std::pair<std::string,int>> &v)
 {
 	if (!from) return;
-	str += from -> c;
-	if (from -> eos) v.push_back(std::pair<std::string,int>(str , from -> eos));
-	auto strx = str.substr(1);
-	extract(from -> left , strx , v);
-	extract(from -> right , strx , v);
-	extract(from -> middle , str , v);
+	//str += from -> c;
+	auto strx = str + from -> c;
+	if (from -> eos > 0) {
+		v.push_back(std::pair<std::string,int>(strx , from -> eos));
+		//std::cout << strx << std::endl;
+	}
+	
+	//auto strx = str.substr(1);
+	extract(from -> left , str , v);
+	extract(from -> right , str , v);
+	extract(from -> middle , strx , v);
 }
 
 

@@ -24,16 +24,16 @@ struct Node{
 
 class Tree{
 	Node *root_;	
-	void insert_(Node**,char*);
-	int count_(Node*,char*);
+	void insert_(Node**,const char*);
+	int count_(Node*,const char*);
 public:
 	friend std::ostream &operator<< (std::ostream &out ,Tree t);
 
 	Tree(Node *root = nullptr) : root_(root) {}
 
-	int count(char *str) { return count_(root_,str); }
+	int count(const char *str) { return count_(root_,str); }
 
-	void insert(char *str) { insert_(&root_,str); }	
+	void insert(const char *str) { insert_(&root_,str); }	
 
 	std::vector<std::pair<std::string,int>>  freqs();
 
