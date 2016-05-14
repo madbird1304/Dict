@@ -1,20 +1,16 @@
 --{-# OPTIONS_GHC -O2 #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
+import Data.Text as T
+import Data.Text.Encoding as E
+import Data.ByteString as BS
 import Data.Char
 import System.Environment
-import Data.List
 
 
-proc :: String -> String
-proc = tail . foldl' fn "\n" where
-    fn (l:ls) r | l == '\n' = if isAlpha r then r:l:ls else l:ls
-                | otherwise = '\n' : l : ls
-
-
---proc = map toLower  . filter isAlpha . 
 
 main :: IO ()
 main = do
-    [inp,outp] <- getArgs
-    input <- readFile inp
-    writeFile outp (proc input)
+    [inp,outp] <- getArgs 
+    input <- (return . E.decodeUtf8) =<< BS.readFile inp
+    mapM_ (BS.appendFile outp . E.encodeUtf8 . T.map (\c -> if isAlpha c then c else '\n')) (T.lines input)
