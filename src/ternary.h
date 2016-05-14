@@ -3,14 +3,8 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-//#include <s
 #include <vector>
 #include <utility>
-//#include <cstdlib>
-//class Dict;
-
-//class Node;
-//Node* nullptr = NULL;
 
 struct Node{
 	char c;
