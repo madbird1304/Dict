@@ -1,8 +1,6 @@
 #include <iostream>
 #include "ternary.h"
 #include <fstream>
-#include "utils.h"
-
 
 using namespace std;
 

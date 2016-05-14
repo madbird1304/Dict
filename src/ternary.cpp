@@ -38,19 +38,14 @@ std::ostream &operator<< (std::ostream &out ,Tree t)
 void extract(Node* from, std::string str, std::vector<std::pair<std::string,int>> &v)
 {
 	if (!from) return;
-	//str += from -> c;
 	auto strx = str + from -> c;
-	if (from -> eos > 0) {
-		v.push_back(std::pair<std::string,int>(strx , from -> eos));
-		//std::cout << strx << std::endl;
-	}
 	
-	//auto strx = str.substr(1);
+	if (from -> eos > 0) v.push_back(std::pair<std::string,int>(strx , from -> eos));
+	
 	extract(from -> left , str , v);
 	extract(from -> right , str , v);
 	extract(from -> middle , strx , v);
 }
-
 
 typedef std::pair<std::string,int> freqp;
 
@@ -60,7 +55,6 @@ std::vector<freqp>  Tree::freqs()
 	extract(root_ , std::string("") , ret);
 	std::sort(ret.begin(),ret.end(), [](freqp l,freqp r) { return l.second > r.second; } );
 	
-	//std::reverse(ret.begin(),ret.end());
 	return ret;
 }
 
