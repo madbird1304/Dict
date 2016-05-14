@@ -7,4 +7,4 @@ preproc:
 	ghc ./src/preproc.hs -o ./bin/preproc.exe
 
 clean:
-	$(RM) Dict.exe
+	$(RM) ./src/*.hi ./src/*.stackdump
